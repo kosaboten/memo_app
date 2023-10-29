@@ -48,7 +48,7 @@ class MemoController extends Controller
         return view('memos.edit', ['memo' => $memo]);
     }
 
-//  Requestクラス型の$requestでフォームの値を受け取る, パラメータの$idを受け取る
+    //  Requestクラス型の$requestでフォームの値を受け取る, パラメータの$idを受け取る
     public function update(Request $request, $id)
     {
         $memo = Memo::find($id);
@@ -58,5 +58,13 @@ class MemoController extends Controller
 
         $memo->save();
         return redirect(route('memos.index'));
+    }
+
+    public function destroy($id)
+    {
+        $memo = Memo::find($id);
+        $memo -> delete();
+
+        return(redirect(route('memos.index')));
     }
 }
