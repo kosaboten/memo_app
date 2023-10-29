@@ -10,15 +10,29 @@
 <body>
     <a href="{{ route('memos.index') }}">戻る</a>
     <h1>新規登録</h1>
+{{-- any()やall()はコレクションクラスで利用可能なメソッド --}}
+    @if ($errors->any())
+        <div class="error">
+            <p>
+                <b>{{ count($errors) }}件のエラーがあります</b>
+            </p>
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('memos.store') }}" method="post">
         @csrf
         <p>
             <label for="title">タイトル</label><br>
-            <input type="text" name="title" id="title">
+            {{-- old()ヘルパーで直前までフォームに入力されていた値を表示 --}}
+            <input type="text" name="title" id="title" value="{{ old('title') }}">
         </p>
         <p>
             <label for="body">本文</label><br>
-            <textarea name="body" class="body" id="body"></textarea>
+            <textarea name="body" class="body" id="body">{{ old('body') }}</textarea>
         </p>
 
         <input type="submit" value="登録">

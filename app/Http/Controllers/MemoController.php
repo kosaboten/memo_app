@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\MemoRequest;
 // Memoクラスを読み込む
 use App\Models\Memo;
 
@@ -19,7 +19,7 @@ class MemoController extends Controller
         return view('memos.create');
     }
 
-    public function store(Request $request)
+    public function store(MemoRequest $request)
     {
         // インスタンスの作成
         $memo = new Memo;
@@ -49,7 +49,7 @@ class MemoController extends Controller
     }
 
     //  Requestクラス型の$requestでフォームの値を受け取る, パラメータの$idを受け取る
-    public function update(Request $request, $id)
+    public function update(MemoRequest $request, $id)
     {
         $memo = Memo::find($id);
 
